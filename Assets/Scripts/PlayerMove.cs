@@ -2,8 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PlayerState{
+	walk,
+	attack,
+	interact
+}
 public class PlayerMove : MonoBehaviour
 {
+	public PlayerState currentState;
 	public float speed;
 	private Rigidbody2D mRB;
 	private Vector3 schange;
@@ -20,7 +26,20 @@ public class PlayerMove : MonoBehaviour
         schange = Vector2.zero;
         schange.x = Input.GetAxisRaw("Horizontal");
         schange.y = Input.GetAxisRaw("Vertical");
-        UpdateAnimAndMove();
+        if(Input.GetButtonDown("Fire1") && currentState != PlayerState.attack)
+        	StartCoroutine(AttackPls());
+        else if(currentState == PlayerState.walk)
+        	UpdateAnimAndMove();
+    }
+
+    private IEnumerator AttackPls()
+    {
+    	anim.SetBool("attacking", true);
+    	currentState = PlayerState.attack;
+    	yield return null;
+    	anim.SetBool("attacking", false);
+    	yield return new WaitForSeconds(.3f);
+    	currentState = PlayerState.walk;
     }
 
     void UpdateAnimAndMove()
