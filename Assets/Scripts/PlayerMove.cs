@@ -84,7 +84,7 @@ public class PlayerMove : MonoBehaviour
 
     public void Heal()
     {
-        playerHP++;
+        playerHP = playerHP + 1;
     }
 
     void HPUpdate()
