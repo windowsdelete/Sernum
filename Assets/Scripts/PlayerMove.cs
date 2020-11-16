@@ -13,6 +13,13 @@ public class PlayerMove : MonoBehaviour
 {
 	public PlayerState currentState;
 	public float speed;
+
+    public float playerHP;
+    public GameObject h1;
+    public GameObject h2;
+    public GameObject h3;
+    public GameObject h4;
+
 	private Rigidbody2D mRB;
 	private Vector3 schange;
 	private Animator anim;
@@ -25,6 +32,7 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        HPUpdate();
         schange = Vector2.zero;
         schange.x = Input.GetAxisRaw("Horizontal");
         schange.y = Input.GetAxisRaw("Vertical");
@@ -57,9 +65,10 @@ public class PlayerMove : MonoBehaviour
     	mRB.MovePosition(transform.position + schange * speed * Time.deltaTime);
     }
 
-    public void Knock(float knockTime)
+    public void Knock(float knockTime, float damage)
     {
         StartCoroutine(KnockCour(knockTime));
+        playerHP -= damage;
     }
 
     private IEnumerator KnockCour(float knockTime)
@@ -70,6 +79,49 @@ public class PlayerMove : MonoBehaviour
             mRB.velocity = Vector2.zero;
             currentState = PlayerState.idle;
             mRB.velocity = Vector2.zero;
+        }
+    }
+
+    public void Heal()
+    {
+        playerHP++;
+    }
+
+    void HPUpdate()
+    {
+        switch(playerHP)
+        {
+            case 0: 
+                h1.SetActive(false);
+                h2.SetActive(false);
+                h3.SetActive(false);
+                h4.SetActive(false);
+                GameObject.FindWithTag("Player").SetActive(false);
+                break;
+            case 1:
+                h1.SetActive(true);
+                h2.SetActive(false);
+                h3.SetActive(false);
+                h4.SetActive(false);
+                break;
+            case 2:
+                h1.SetActive(true);
+                h2.SetActive(true);
+                h3.SetActive(false);
+                h4.SetActive(false);
+                break;
+            case 3:
+                h1.SetActive(true);
+                h2.SetActive(true);
+                h3.SetActive(true);
+                h4.SetActive(false);
+                break;
+            case 4:
+                h1.SetActive(true);
+                h2.SetActive(true);
+                h3.SetActive(true);
+                h4.SetActive(true);
+                break;          
         }
     }
 }

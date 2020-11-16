@@ -5,6 +5,7 @@ using UnityEngine;
 public class KuvwinController : MonoBehaviour
 {
     private Animator anim;
+    public GameObject hilka;
 
     void Start()
     {
@@ -26,5 +27,6 @@ public class KuvwinController : MonoBehaviour
     {
     	yield return new WaitForSeconds(.3f);
     	this.gameObject.SetActive(false);
+        hilka.SetActive(true);
     }
 }

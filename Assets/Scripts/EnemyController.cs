@@ -13,14 +13,24 @@ public class EnemyController : MonoBehaviour
 {
 
     public EnemyState currentState;
-	public int hp;
+	public float hp;
 	public string eName;
 	public int bAttack;
 	public float mSpeed;
 
-    public void Knock(Rigidbody2D mRB, float knockTime)
+    private void TakeDamage(float damage)
+    {
+        hp -= damage;
+        if(hp <= 0)
+        {
+            this.gameObject.SetActive(false);
+        }
+    }
+
+    public void Knock(Rigidbody2D mRB, float knockTime, float damage)
     {
         StartCoroutine(KnockCo(mRB, knockTime));
+        TakeDamage(damage);
     }
 
     private IEnumerator KnockCo(Rigidbody2D mRB, float knockTime)
