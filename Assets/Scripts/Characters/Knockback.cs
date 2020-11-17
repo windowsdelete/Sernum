@@ -33,7 +33,7 @@ public class Knockback : MonoBehaviour
                     hit.AddForce(difference, ForceMode2D.Impulse);
                     hit.isKinematic = true;
                     hit.GetComponent<EnemyController>().currentState = EnemyState.stagger;
-                    other.GetComponent<EnemyController>().Knock(hit, knockTime, damage);
+                    other.GetComponent<EnemyController>().Knock(hit, knockTime, GameObject.FindWithTag("Player").GetComponent<PlayerMove>().damage);
                 }
                 if(other.gameObject.CompareTag("Player"))
                 {

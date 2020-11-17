@@ -13,6 +13,7 @@ public class RoomSwitch : MonoBehaviour
 	public string plName;
 	public GameObject text;
 	public Text plText;
+    private bool teleportCD;
 
 	void Start()
 	{
@@ -23,6 +24,8 @@ public class RoomSwitch : MonoBehaviour
     {
     	if(other.CompareTag("Player"))
     	{
+            if(!teleportCD)
+            {
     		cam.lPos += camChange;
     		cam.mPos += camChange;
     		other.transform.position += playerChange;
@@ -30,6 +33,7 @@ public class RoomSwitch : MonoBehaviour
     		{
     			StartCoroutine(plNamePls());
     		}
+        }
     	}
     }
 
@@ -37,7 +41,9 @@ public class RoomSwitch : MonoBehaviour
     {
     	text.SetActive(true);
     	plText.text = plName;
-    	yield return new WaitForSeconds(2f);
+        teleportCD = !teleportCD;
+    	yield return new WaitForSeconds(1f);
     	text.SetActive(false);
+        teleportCD = !teleportCD;
     }
 }

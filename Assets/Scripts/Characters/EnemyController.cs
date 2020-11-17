@@ -13,17 +13,31 @@ public class EnemyController : MonoBehaviour
 {
 
     public EnemyState currentState;
+    //public GameObject tPlayer;
 	public float hp;
+    public float respawnHP;
 	public string eName;
 	public int bAttack;
 	public float mSpeed;
+    public float hX;
+    public float hY;
+    public int enemyClass;
+
+    void Start()
+    {
+        //tPlayer = GameObject.FindWithTag("Player");
+    }
 
     private void TakeDamage(float damage)
     {
         hp -= damage;
         if(hp <= 0)
         {
-            this.gameObject.SetActive(false);
+            StartCoroutine(respawn());
+            //this.gameObject.SetActive(false);
+            this.gameObject.transform.position = new Vector3(hX, -300);
+            //StartCoroutine(respawn());
+            GameObject.FindWithTag("Player").GetComponent<PlayerMove>().GetEnemyGold(enemyClass);
         }
     }
 
@@ -42,5 +56,13 @@ public class EnemyController : MonoBehaviour
             currentState = EnemyState.idle;
             mRB.velocity = Vector2.zero;
         }
+    }
+
+    private IEnumerator respawn()
+    {
+        hp = respawnHP;
+        yield return new WaitForSeconds(5f);
+        this.gameObject.transform.position = new Vector3(hX, hY);
+        //this.gameObject.SetActive(true);
     }
 }

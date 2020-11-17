@@ -8,8 +8,7 @@ public class redDevil : EnemyController
     public Transform target;
     public float spectateRadius;
     public float attackRadius;
-    public Transform homePos;
-    public Animator anim;
+    private Animator anim;
     private Vector3 rchange;
 
     void Start()
@@ -22,6 +21,7 @@ public class redDevil : EnemyController
     void FixedUpdate()
     {
         CheckDistance();
+        //this.gameObject.transform.position = new Vector3(hX, hY);
     }
 
     void CheckDistance()
@@ -30,7 +30,6 @@ public class redDevil : EnemyController
     	{
     		Vector3 temp = Vector3.MoveTowards(transform.position, target.position, mSpeed * Time.deltaTime);
     	   	changeAnim(temp - transform.position);
-
             mRB.MovePosition(temp);
         }
     }

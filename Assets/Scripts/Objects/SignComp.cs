@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class SignComp : MonoBehaviour
 {
 	public GameObject dBox;
+    public GameObject pressE;
 	public Text dText;
 	public string dString;
 	public bool dActive;
@@ -36,6 +37,7 @@ public class SignComp : MonoBehaviour
     	if(other.CompareTag("Player"))
     	{
     		dActive = true;
+            pressE.SetActive(true);
     	}
     }
 
@@ -45,6 +47,7 @@ public class SignComp : MonoBehaviour
     	{
     		dActive = false;
     		dBox.SetActive(false);
+            pressE.SetActive(false);
     	}
     }
 }
