@@ -6,10 +6,10 @@ public class LootController : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
-    	if(other.CompareTag("Player") && other.GetComponent<PlayerMove>().playerHP < (other.GetComponent<PlayerMove>().maxHP-0.5f))
+    	if(other.CompareTag("Player") && other.GetComponent<PlayerMove>().playerHP < other.GetComponent<PlayerMove>().maxHP)
     	{
-    		other.GetComponent<PlayerMove>().Heal();
     		this.gameObject.SetActive(false);
+    		other.GetComponent<PlayerMove>().Heal();
     	}
     }
 }

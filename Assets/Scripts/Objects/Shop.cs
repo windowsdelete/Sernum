@@ -44,8 +44,8 @@ public class Shop : MonoBehaviour
         				hpNew.text = "5";
         				damageNew.text = "2";
         				lvlNew.text = "2";
-        				costText.text = "Cost: 200";
-        				cost = 200;
+        				costText.text = "Cost: 100";
+        				cost = 100;
         				break;
         			case 2:
         				hpCur.text = "HP: 5";
@@ -54,8 +54,8 @@ public class Shop : MonoBehaviour
         				hpNew.text = "6";
         				damageNew.text = "3";
         				lvlNew.text = "3";
-        				costText.text = "Cost: 400";
-        				cost = 400;
+        				costText.text = "Cost: 300";
+        				cost = 300;
         				break;
         			case 3:
         				hpCur.text = "HP: 6";
@@ -98,11 +98,11 @@ public class Shop : MonoBehaviour
     	{
     		    switch(cost)
         		{
-        			case 200:
-        				GameObject.FindWithTag("Player").GetComponent<PlayerMove>().playerGold -= 200;
+        			case 100:
+        				GameObject.FindWithTag("Player").GetComponent<PlayerMove>().playerGold -= 100;
         				break;
-        			case 400:
-        				GameObject.FindWithTag("Player").GetComponent<PlayerMove>().playerGold -= 400;
+        			case 300:
+        				GameObject.FindWithTag("Player").GetComponent<PlayerMove>().playerGold -= 300;
         				break;
         		}
         				GameObject.FindWithTag("Player").GetComponent<PlayerMove>().maxHP++;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public enum PlayerState{
 	walk,
@@ -17,6 +18,7 @@ public class PlayerMove : MonoBehaviour
 	public int playerGold;
 	public int lvl;
 	public Text goldText;
+	public Text lvlText;
 
     public float playerHP;
     public float maxHP;
@@ -42,6 +44,7 @@ public class PlayerMove : MonoBehaviour
     {
         HPUpdate();
         goldText.text = playerGold.ToString();
+        lvlText.text = lvl.ToString();
         schange = Vector2.zero;
         schange.x = Input.GetAxisRaw("Horizontal");
         schange.y = Input.GetAxisRaw("Vertical");
@@ -94,7 +97,7 @@ public class PlayerMove : MonoBehaviour
     public void Heal()
     {
         playerHP++;
-        playerGold++;
+        playerGold += 5;
     }
 
     public void GetEnemyGold(int num)
@@ -105,11 +108,14 @@ public class PlayerMove : MonoBehaviour
     		playerGold += 10;
     		break;
     	case 2:
-    		playerGold += 20;
-    		break;
-    	case 3:
     		playerGold += 30;
     		break;
+    	case 3:
+    		playerGold += 50;
+    		break;
+        case 4:
+            SceneManager.LoadScene("Win");
+            break;
     	}
     }
 
@@ -117,15 +123,6 @@ public class PlayerMove : MonoBehaviour
     {
         switch(playerHP)
         {
-            case 0: 
-                h1.SetActive(false);
-                h2.SetActive(false);
-                h3.SetActive(false);
-                h4.SetActive(false);
-                h5.SetActive(false);
-                h6.SetActive(false);
-                GameObject.FindWithTag("Player").SetActive(false); //refactor
-                break;
             case 1:
                 h1.SetActive(true);
                 h2.SetActive(false);
@@ -174,6 +171,18 @@ public class PlayerMove : MonoBehaviour
                 h5.SetActive(true);
                 h6.SetActive(true);
                 break;          
+        }
+
+        if(playerHP <= 0)
+        {
+                h1.SetActive(false);
+                h2.SetActive(false);
+                h3.SetActive(false);
+                h4.SetActive(false);
+                h5.SetActive(false);
+                h6.SetActive(false);
+                GameObject.FindWithTag("Player").SetActive(false);
+                SceneManager.LoadScene("Lose");
         }
     }
 }

@@ -21,7 +21,6 @@ public class redDevil : EnemyController
     void FixedUpdate()
     {
         CheckDistance();
-        //this.gameObject.transform.position = new Vector3(hX, hY);
     }
 
     void CheckDistance()
